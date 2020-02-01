@@ -45,7 +45,8 @@ setup(
     install_requires=[
         'csirtg-geo',
         'csirtg-peers',
-        'csirtg-indicator>=3.0a1,<4.0'
+        'csirtg-indicator>=3.0a1,<4.0',
+        'prettytable'
     ],
     scripts=[],
     entry_points={
