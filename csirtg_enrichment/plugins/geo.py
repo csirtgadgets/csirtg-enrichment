@@ -6,7 +6,7 @@ import sys
 from csirtg_geo import get as get_geo
 
 from csirtg_indicator.utils.fqdn import resolve_fqdn, resolve_url
-from csirtg_enrichment.constants import RESOLVE_GEO
+from csirtg_enrichment.constants import RESOLVE_GEO, RESOLVE_FQDN
 
 
 logger = logging.getLogger(__name__)
@@ -41,6 +41,9 @@ def _process(indicator):
 
     i = indicator.indicator
     if indicator.itype in ['fqdn', 'url']:
+        if not RESOLVE_FQDN:
+            return indicator
+        
         i = _resolve_indicator(i, indicator.itype)
 
     try:
