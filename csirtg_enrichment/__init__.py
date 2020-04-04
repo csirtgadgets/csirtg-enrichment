@@ -37,7 +37,6 @@ def resolve(data):
         except (KeyboardInterrupt, SystemExit):
             break
 
-    pprint(data)
     return [i.__dict__() for i in data]
 
 

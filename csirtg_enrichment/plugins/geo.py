@@ -43,7 +43,7 @@ def _process(indicator):
     if indicator.itype in ['fqdn', 'url']:
         if not RESOLVE_FQDN:
             return indicator
-        
+
         i = _resolve_indicator(i, indicator.itype)
 
     try:
