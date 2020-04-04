@@ -1,6 +1,8 @@
 
+import os
 from csirtg_indicator import Indicator
 from csirtg_peers import get
+from csirtg_enrichment.constants import RESOLVE_PEERS
 
 
 def _process(indicator):
@@ -16,6 +18,9 @@ def _process(indicator):
 
 
 def process(data):
+    if not RESOLVE_PEERS:
+        return
+
     if not isinstance(data, list):
         data = [data]
 

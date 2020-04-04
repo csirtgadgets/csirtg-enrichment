@@ -7,7 +7,7 @@ import textwrap
 from argparse import ArgumentParser
 from argparse import RawDescriptionHelpFormatter
 from pprint import pprint
-from multiprocessing import Pool, cpu_count
+from multiprocessing import Pool
 
 from csirtg_indicator import Indicator
 from csirtg_indicator.constants import LOG_FORMAT
@@ -15,9 +15,7 @@ from csirtg_indicator.format import FORMATS
 
 from csirtg_enrichment import plugins
 from csirtg_enrichment.utils import load_plugins, get_argument_parser
-
-THREADS = os.getenv('THREADS', cpu_count() * 1.5)
-THREADS = int(THREADS)
+from csirtg_enrichment.constants import RESOLVE_GEO, RESOLVE_FQDN, THREADS
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +26,9 @@ def resolve(data):
 
     p = load_plugins(plugins.__path__)
 
-    data = [Indicator(i, resolve_geo=True, resolve_fqdn=True) for i in data]
+    data = \
+        [Indicator(i, resolve_geo=RESOLVE_GEO, resolve_fqdn=RESOLVE_FQDN)
+         for i in data]
 
     for pp in p:
         try:

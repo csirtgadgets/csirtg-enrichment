@@ -1,10 +1,13 @@
 
+import os
 import logging
 from pprint import pprint
 import sys
 from csirtg_geo import get as get_geo
 
 from csirtg_indicator.utils.fqdn import resolve_fqdn, resolve_url
+from csirtg_enrichment.constants import RESOLVE_GEO
+
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +59,9 @@ def _process(indicator):
 
 
 def process(data):
+    if not RESOLVE_GEO:
+        return
+
     if not isinstance(data, list):
         data = [data]
 
